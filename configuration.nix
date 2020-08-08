@@ -58,12 +58,13 @@
     vim
     tmux
     chromium
-    bluez
     git
     alacritty
     feh
     stow
   ];
+
+  hardware.bluetooth.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
