@@ -62,6 +62,7 @@
     alacritty
     feh
     stow
+    fzf
   ];
 
   hardware.bluetooth.enable = true;
@@ -125,12 +126,11 @@
   services.xserver = {
     enable = true;
 
-    xkbOptions = "escape:swapcaps";
+    xkbOptions = "caps:escape";
     
-    autoRepeatDelay = 100;
-    autoRepeatInterval = 10;
+    autoRepeatDelay = 200;
+    autoRepeatInterval = 30;
     
-
     desktopManager = {
       xterm.enable = false;
     };
@@ -154,4 +154,3 @@
     fira-code
   ];
 }
-
