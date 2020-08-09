@@ -150,6 +150,18 @@
     };
   };
 
+  services.openvpn.servers = {
+    work-vpn = {
+      config = "config /root/nixos/openvpn/work-vpn/work-vpn.conf";
+      autoStart = false;
+      updateResolvConf = true;
+    };
+  };
+
+  powerManagement.powerDownCommands = "
+    systemctl stop openvpn-work-vpn
+  ";
+
   fonts.fonts = with pkgs; [
     fira-code
   ];
