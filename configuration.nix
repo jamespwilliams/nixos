@@ -63,6 +63,8 @@
     feh
     stow
     fzf
+    libnotify
+    thunderbird
   ];
 
   hardware.bluetooth.enable = true;
