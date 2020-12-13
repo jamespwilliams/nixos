@@ -180,6 +180,18 @@
     systemctl stop openvpn-work-vpn
   ";
 
+  programs.slock.enable = true;
+  security.wrappers.slock = { source="${pkgs.slock}/bin/slock"; };
+
+  systemd.services.slocker = {
+    description = "Slock on systemctl suspend";
+    wantedBy = [ "suspend.target" ];
+    environment.DISPLAY = ":0";
+    script = config.security.wrapperDir + "/slock";
+    serviceConfig.Type = "oneshot";
+    serviceConfig.User = "jpw";
+  };
+
   fonts.fonts = with pkgs; [
     fira-code
   ];
