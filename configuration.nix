@@ -29,14 +29,22 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # wpa_supplicant fails to start because the interface name assigned when net.ifnames=1 becomes
+  # too long when p2p-dev- is prepended:
+  boot.kernelParams = [ "net.ifnames=0" ];
+
   networking.hostName = "napolin"; # Define your hostname.
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # networking.networkmanager.enable = true;  # Enables wireless support via networkmanager
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-  networking.interfaces.wlp0s20f3.useDHCP = true;
+  networking.interfaces.wlan0.useDHCP = true;
+
+  networking.firewall.allowedTCPPorts = [ 8080 ];
+  networking.firewall.allowedUDPPorts = [ 8080 ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
