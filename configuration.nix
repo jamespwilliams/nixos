@@ -139,19 +139,34 @@
     };
    
     displayManager = {
-        defaultSession = "none+i3";
+        defaultSession = "none+dwm";
+        sessionCommands = ''
+          xautolock -time 10 -locker "systemctl suspend" &
+        '';
     };
 
-    windowManager.i3 = {
+    windowManager.dwm = {
       enable = true;
-      extraPackages = with pkgs; [
-        dmenu #application launcher most people use
-        i3status # gives you the default i3 status bar
-        i3lock #default i3 screen locker
-        i3blocks #if you are planning on using i3blocks over i3status
-     ];
     };
   };
+
+  services.dwm-status = {
+    enable = true;
+    order = [
+      "network"
+      "audio"
+      "cpu_load"
+      "time"
+    ];
+  };
+
+  nixpkgs.overlays = [
+    (self: super: {
+      dwm = super.dwm.overrideAttrs (_: {
+        src = /home/jpw/dwm; # builtins.fetchGit https://github.com/LukeSmithxyz/dwm.git;
+      });
+    })
+  ];
 
   services.openvpn.servers = {
     work-vpn = {
