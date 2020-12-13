@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./vim.nix
     ] ++ lib.optional (builtins.pathExists ./configuration-local.nix) ./configuration-local.nix;
 
   nixpkgs.config.allowUnfree = true;
