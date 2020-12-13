@@ -63,8 +63,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    gnumake
+    gcc
+    xorg.libX11
     wget
-    vim
     tmux
     chromium
     git
@@ -74,6 +76,10 @@
     fzf
     libnotify
     thunderbird
+    dmenu
+    bc
+    xautolock
+    dunst
   ];
 
   hardware.bluetooth.enable = true;
