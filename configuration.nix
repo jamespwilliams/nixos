@@ -142,14 +142,14 @@
     enable = true;
 
     xkbOptions = "caps:escape";
-    
+
     autoRepeatDelay = 200;
     autoRepeatInterval = 30;
-    
+
     desktopManager = {
       xterm.enable = false;
     };
-   
+
     displayManager = {
         defaultSession = "none+dwm";
         sessionCommands = ''
