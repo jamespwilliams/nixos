@@ -63,23 +63,24 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    gnumake
-    gcc
-    xorg.libX11
-    wget
-    tmux
-    chromium
-    git
     alacritty
-    feh
-    stow
-    fzf
-    libnotify
-    thunderbird
-    dmenu
     bc
-    xautolock
+    chromium
+    dmenu
     dunst
+    feh
+    fzf
+    gcc
+    git
+    gnumake
+    libnotify
+    pamixer
+    stow
+    thunderbird
+    tmux
+    wget
+    xautolock
+    xorg.libX11
   ];
 
   hardware.bluetooth.enable = true;
@@ -221,6 +222,15 @@
     script = config.security.wrapperDir + "/slock";
     serviceConfig.Type = "oneshot";
     serviceConfig.User = "jpw";
+  };
+
+  systemd.user.services.dunst = {
+    enable = true;
+    description = "Shows notifications.";
+    wantedBy = [ "default.target" ];
+    serviceConfig.Restart = "always";
+    serviceConfig.RestartSec = 2;
+    serviceConfig.ExecStart = "${pkgs.dunst}/bin/dunst";
   };
 
   fonts.fonts = with pkgs; [
