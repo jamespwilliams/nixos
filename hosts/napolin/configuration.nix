@@ -9,25 +9,6 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # Supposedly better for the SSD.
-  fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
-
-  boot.initrd.luks.devices = {
-    root = {
-      device = "/dev/disk/by-uuid/52560806-3f7f-456d-902a-e68805f0f5e9";
-      preLVM = true;
-      allowDiscards = true;
-    };
-  };
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # wpa_supplicant fails to start because the interface name assigned when net.ifnames=1 becomes
-  # too long when p2p-dev- is prepended:
-  boot.kernelParams = [ "net.ifnames=0" ];
-
   networking.hostName = "napolin";
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -59,11 +40,6 @@
     xautolock
     xorg.libX11
   ];
-
-  hardware.bluetooth.enable = true;
-
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
 
   users.users.jpw = {
     isNormalUser = true;
