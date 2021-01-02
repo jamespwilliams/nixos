@@ -29,8 +29,13 @@
 
   nixpkgs.overlays = [
     (self: super: {
-      dwm = super.dwm.overrideAttrs (_: {
-        src = /home/jpw/dwm; # builtins.fetchGit https://github.com/LukeSmithxyz/dwm.git;
+      dwm = super.dwm.overrideAttrs (oa: {
+        src = pkgs.fetchFromGitHub {
+          owner = "jamespwilliams";
+          repo = "dwm";
+          rev = "63f241c890f2d703fe5a5ba55f9be90533e30930";
+          sha256 = "0n2i6csyl4pcxvm5kdbbvb24yp50qj76xbwgm650ag4jn659dbrn";
+        };
       });
     })
   ];
